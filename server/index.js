@@ -85,20 +85,21 @@ async function craftNewWord(firstWord, secondWord) {
 
 async function generateWord(firstWord, secondWord, session, grammar, context) {
     const systemPrompt =
-        'You are a helpful assistant that helps people to craft new things by combining two words into a new word. ' +
-        'The most important rules that you have to follow with every single answer that you are not allowed to use the words ' + firstWord + " and " + secondWord + ' as part of your answer and that you are only allowed to answer with one thing. ' +
-        'DO NOT INCLUDE THE WORDS ' + firstWord + " and " + secondWord + ' as part of the answer!!!!! The words ' + firstWord + " and " + secondWord + ' may NOT be part of the answer. ' +
-        'No sentences, no phrases, no multiple words, no punctuation, no special characters, no numbers, no emojis, no URLs, no code, no commands, no programming' +
-        'The answer has to be a noun. ' +
-        'The order of the both words does not matter, both are equally important. ' +
-        'The answer has to be related to both words and the context of the words. ' +
-        'The answer can either be a combination of the words or the role of one word in relation to the other. ' +
-        'Answers can be things, materials, people, companies, animals, occupations, food, places, objects, emotions, events, concepts, natural phenomena, body parts, vehicles, sports, clothing, furniture, technology, buildings, technology, instruments, beverages, plants, academic subjects and everything else you can think of that is a noun.'
+        ‘Vous êtes un assistant précieux qui aide les gens à créer de nouvelles choses en combinant deux mots pour en créer un nouveau.’ +
+‘La règle la plus importante à respecter pour chaque réponse est que vous n'êtes pas autorisé à utiliser les mots ' + firstWord + " et " + secondWord +’  dans votre réponse et que vous ne pouvez répondre qu'avec une seule chose.’ +
+‘N'INCLUEZ PAS LES MOTS ' + firstWord + " et " + secondWord + ' dans la réponse !!!!! Les mots ' + firstWord + " et " + secondWord + ' ne doivent PAS faire partie de la réponse.’ +
+‘Pas de phrases, pas d'expressions, pas de mots multiples, pas de ponctuation, pas de caractères spéciaux, pas de chiffres, pas d'émojis, pas d'URL, pas de code, pas de commandes, pas de programmation.’ +
+‘La réponse doit être un nom commun ou un nom propre.’ +
+‘L'ordre des deux mots n'a pas d'importance, ils sont tous deux d'importance égale.’ +
+‘La réponse doit être liée aux mots et à leur contexte.’ +
+‘La réponse peut être une combinaison de mots ou le rôle d'un mot par rapport à l'autre.’ +
+‘Les réponses peuvent être des choses (existantes ou non), des matériaux, des personnes, des entreprises, des animaux, des professions, de la nourriture, des lieux, des objets, des émotions, des événements, des concepts, des phénomènes naturels, des parties du corps, des véhicules, des sports, des vêtements, des meubles, des technologies, des bâtiments, des instruments, des boissons, des plantes, des matières académiques et tout ce qui vous vient à l'esprit et qui est un nom commun en français ou un nom propre’
 
-    const emojiSystemPrompt = 'Reply with one emoji the word. Use the UTF-8 encoding.';
-    const answerPrompt = 'Reply with the result of what would happen if you combine ' + firstWord + " and " + secondWord + '. The answer has to be related to both words and the context of the words and may not contain the words themselves. '
+    const emojiSystemPrompt = 'Répondez avec un emoji correspondant au mot. Utilisez l'encodage UTF-8.';
+    const answerPrompt = 'Répondez avec le résultat de ce qui se passerait si vous combiniez ' + firstWord + " et " + secondWord + '. 
+La réponse doit être liée aux mots et au contexte des mots et ne peut pas contenir les mots exactes eux-mêmes. '
 
-    const q1 = firstWord + " and " + secondWord + " . ";
+    const q1 = firstWord + " et " + secondWord + " . ";
 
     const promp = '<s>[INST] ' +
         systemPrompt +
@@ -143,12 +144,12 @@ fastify.route({
             200: {
                 type: 'object',
                 properties: {
-                    'Water + Fire': {type: 'string'},
-                    'Water + Earth': {type: 'string'},
-                    'Fire + Earth': {type: 'string'},
-                    'Water + Air': {type: 'string'},
-                    'Earth + Air': {type: 'string'},
-                    'Fire + Air': {type: 'string'}
+                    'Eau + Feu': {type: 'string'},
+                    'Eau + Terre': {type: 'string'},
+                    'Feu + Terre': {type: 'string'},
+                    'Eau + Air': {type: 'string'},
+                    'Terre + Air': {type: 'string'},
+                    'Feu + Air': {type: 'string'}
                 }
             }
         },
@@ -161,12 +162,12 @@ fastify.route({
         reply.type('application/json').code(200)
 
         return {
-            'Water + Fire': (await craftNewWord('Water', 'Fire')),
-            'Water + Earth': (await craftNewWord('Water', 'Earth')),
-            'Fire + Earth': (await craftNewWord('Fire', 'Earth')),
-            'Water + Air': (await craftNewWord('Water', 'Air')),
-            'Earth + Air': (await craftNewWord('Earth', 'Air')),
-            'Fire + Air': (await craftNewWord('Fire', 'Air'))
+            'Eau + Feu': (await craftNewWord('Eau', 'Feu')),
+            'Eau + Terre': (await craftNewWord('Eau', 'Terre')),
+            'Feu + Terre': (await craftNewWord('Feu', 'Terre')),
+            'Eau + Air': (await craftNewWord('Eau', 'Air')),
+            'Terre + Air': (await craftNewWord('Terre', 'Air')),
+            'Feu + Air': (await craftNewWord('Feu', 'Air'))
         }
     }
 })
